@@ -10,15 +10,22 @@ jobs:
           run: sudo apt-get install -y cowsay
         - name: Execute cowsay
           run: cowsay -f dragon "RUN fast ..." >> dragon.txt
-        - name: sleep for 30 sec
-          run: sleep 30
+        - name: Upload artifact
+          uses: actions/upload-artifact@v3
+          with: 
+            name: dragon-file
+            path: dragon.txt
+
     
     test_job2:
         needs: build_job1
         runs-on: ubuntu-latest
         steps:
-        - name: sleep
-          run: sleep 10
+        - name: Download artifact
+          uses: actions/download-artifact@v3
+          with: 
+            name: dragon-file
+      
         - name: Test if file exists
           run: ls -ltra dragon.txt
 
@@ -26,5 +33,9 @@ jobs:
         needs: test_job2
         runs-on: ubuntu-latest
         steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v3
+          with: 
+            name: dragon-file
         - name: Read file
           run: cat dragon.txt
