@@ -3,7 +3,6 @@ name: Explore variables
 on: push
 env:
     CONTAINER_REGISTRY: docker.io
-    DOCKER_USERNAME: sabavivek
     IMAGE_NAME: alpine
 jobs:
      Docker:
@@ -13,9 +12,7 @@ jobs:
           run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
         - name: Docker login
-          env:
-            DOCKER_PASSWORD: Chennartz
-          run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+          run: echo docker login --username=$DOCKER_USERNAME --password=${{ secrets.DOCKER_PASSWORD }}
         - name: DOCKER publish
           run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
