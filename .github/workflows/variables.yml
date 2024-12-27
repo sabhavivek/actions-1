@@ -19,7 +19,7 @@ jobs:
         - name: DOCKER publish
           run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
-      deploy:
+     Deploy:
         needs: Docker
         runs-on: ubuntu-latest
         steps:
