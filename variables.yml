@@ -1,0 +1,27 @@
+name: Explore variables
+
+on: push
+env:
+    CONTAINER_REGISTRY: docker.io
+    DOCKER_USERNAME: sabavivek
+    IMAGE_NAME: alpine
+jobs:
+     Docker:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Docker build
+          run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+        - name: Docker login
+          env:
+            DOCKER_PASSWORD: Chenna!42
+          run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+        - name: DOCKER publish
+          run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+      deploy:
+        needs: Docker
+        runs-on: ubuntu-latest
+        steps:
+        - name: Docker run
+          run: echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
