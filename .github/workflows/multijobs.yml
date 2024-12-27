@@ -1,0 +1,30 @@
+name: Multi jobs
+
+on: push
+
+jobs:
+    build_job1:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Install cowsay program
+          run: sudo apt-get install -y cowsay
+        - name: Execute cowsay
+          run: cowsay -f dragon "RUN fast ..." >> dragon.txt
+        - name: sleep for 30 sec
+          run: sleep 30
+    
+    test_job2:
+        needs: build_job1
+        runs-on: ubuntu-latest
+        steps:
+        - name: sleep
+          run: sleep 10
+        - name: Test if file exists
+          run: ls -ltra dragon.txt
+
+    deploy_job3:
+        needs: test_job2
+        runs-on: ubuntu-latest
+        steps:
+        - name: Read file
+          run: cat dragon.txt
