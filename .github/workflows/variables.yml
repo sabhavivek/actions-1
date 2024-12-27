@@ -14,7 +14,7 @@ jobs:
 
         - name: Docker login
           env:
-            DOCKER_PASSWORD: Chenna!42
+            DOCKER_PASSWORD: Chennartz
           run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
         - name: DOCKER publish
           run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
