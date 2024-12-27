@@ -4,7 +4,7 @@ on:
     workflow_dispatch: 
 
 jobs:
-    deploy-on-ubuntu:
+    deploy:
         strategy:
           matrix:
             os: [ubuntu-latest, windows-latest, ubuntu-20.4]
