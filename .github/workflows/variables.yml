@@ -29,5 +29,5 @@ jobs:
         - name: Docker run
           run: |
             echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-            sleep 600
+            sleep 60
           
