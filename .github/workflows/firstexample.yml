@@ -14,7 +14,8 @@ jobs:
             echo "Hello!!!"
             ls -ltra
             cat README.md
-
+        - name: cowsay
+          run: cowsay -f dragon "RUN....." > dragon.txt
 
         - name: List files
           run: ls
